@@ -1,0 +1,61 @@
+--Tenho um banco chamado Loja com as tabelas 'Categorias','Clientes','Clientes_inativos','Endereco','Estoque','Funcionario','Produto' e 'Vendas'.
+--Criado por mim para realização de exercícios.
+--SELECT
+
+--Preciso trazer todos os nomes de clientes da tabela Clientes.
+
+USE Loja
+GO 
+SELECT Nome
+FROM Clientes
+
+--Preciso trazer os nomes dos produtos da tabela Produto em ordem alfabética.
+--Por padrão ORDER BY já traz os resultados em ordem alfabética.
+
+USE Loja
+GO
+SELECT Nome
+FROM Produto
+ORDER BY Nome ASC
+
+--Preciso trazer o ID do produto e a quantidade em estoque dos produtos do maior ao menor.
+
+USE Loja
+GO
+SELECT IDProduto, Quantidade
+FROM Estoque
+ORDER BY Quantidade DESC;
+
+--Preciso identificar ,sem repetição, quais cidades estão cadastradas no meu banco.
+
+USE Loja
+GO
+SELECT DISTINCT Cidade
+FROM Endereco
+
+--Preciso do ID e nome somente dos gerentes.
+
+USE Loja
+GO
+SELECT IDFuncionario,Nome,Cargo
+FROM Funcionario
+WHERE Cargo='Gerente'
+
+--Preciso dos nomes dos produtos da categoria Calca De ID 1 que tenham um preço superior a 50 ou estejam em estoque.
+
+SELECT IDProduto,Nome,Preco 
+FROM Produto
+WHERE IDCategoria ='1' and Preco > 50 OR Quantidade > 0
+
+--Selecione o ID e o nome das categorias, usando Alias com nome 'Numero_do_Produto' e Identificacao_Produto para as colunas de ID e categoria.
+--Alias(AS) permite mudar o nome da coluna somente no momento da exibição. 
+
+SELECT IDCategoria
+AS Numero_do_Produto, Nome AS Identificacao_Produto
+FROM Categorias
+ 
+--Trazer os nomes dos clientes de duas tabelas diferentes: Clientes e Clientes Antigos juntos.
+
+SELECT Nome FROM Clientes
+UNION
+SELECT Nome FROM Clientes_inativos
